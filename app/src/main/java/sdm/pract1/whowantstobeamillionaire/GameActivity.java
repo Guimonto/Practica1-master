@@ -65,8 +65,8 @@ public class GameActivity extends AppCompatActivity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         ((TextView) findViewById(R.id.question)).setText(prefs.getString("question", ""));
-        ((TextView) findViewById(R.id.QT_NB)).setText(prefs.getString("question_number", ""));
-        ((TextView) findViewById(R.id.PF_MN)).setText(prefs.getString("play_for", ""));
+        ((TextView) findViewById(R.id.QT_NB)).setText(prefs.getString("question_number", "1"));
+        ((TextView) findViewById(R.id.PF_MN)).setText(prefs.getString("play_for", getResources().getString(R.string.price100)));
         points = prefs.getInt("score", 0);
         correct = prefs.getInt("right", 0);
         ind = prefs.getInt("indice", 0);
@@ -332,6 +332,7 @@ public class GameActivity extends AppCompatActivity {
                 if (correct == 1){
                     cont++;
                     puntuacion(cont);
+                    String score = String.valueOf(points);
                     b1.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                     b2.setBackgroundColor(getResources().getColor(R.color.colorRed));
                     b3.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -347,12 +348,14 @@ public class GameActivity extends AppCompatActivity {
                     },3000);
                 }
                 else{
-                    if(cont < 5 )
-                    puntuacion(0);
+                    if(cont < 5 ) {
+                        puntuacion(0);
+                        String score = String.valueOf(points);
+                    }
                     else {
-                        if (cont >= 5 & cont < 10) puntuacion(5);
+                        if (cont >= 5 & cont < 10) {puntuacion(5); String score = String.valueOf(points);}
                         else {
-                            if (cont >= 10) puntuacion(10);
+                            if (cont >= 10) {puntuacion(10); String score = String.valueOf(points);}
                         }
                     }
                     b1.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -379,6 +382,7 @@ public class GameActivity extends AppCompatActivity {
                 if (correct == 2) {
                     cont ++;
                     puntuacion(cont);
+                    String score = String.valueOf(points);
                     b2.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                     b1.setBackgroundColor(getResources().getColor(R.color.colorRed));
                     b3.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -395,12 +399,14 @@ public class GameActivity extends AppCompatActivity {
                 }
                 else{
 
-                    if(cont < 5 )
+                    if(cont < 5 ) {
                         puntuacion(0);
+                        String score = String.valueOf(points);
+                    }
                     else {
-                        if (cont >= 5 & cont < 10) puntuacion(5);
+                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points);}
                         else {
-                            if (cont >= 10) puntuacion(10);
+                            if (cont >= 10){ puntuacion(10); String score = String.valueOf(points);}
                         }
                     }
                     b2.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -426,6 +432,7 @@ public class GameActivity extends AppCompatActivity {
                 if (correct == 3) {
                     cont ++;
                     puntuacion(cont);
+                    String score = String.valueOf(points);
                     b3.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                     b1.setBackgroundColor(getResources().getColor(R.color.colorRed));
                     b2.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -440,12 +447,14 @@ public class GameActivity extends AppCompatActivity {
                     },3000);
                 }
                 else {
-                    if(cont < 5 )
+                    if(cont < 5 ) {
                         puntuacion(0);
+                        String score = String.valueOf(points);
+                    }
                     else {
-                        if (cont >= 5 & cont < 10) puntuacion(5);
+                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points);}
                         else {
-                            if (cont >= 10) puntuacion(10);
+                            if (cont >= 10){ puntuacion(10); String score = String.valueOf(points);}
                         }
                     }
                     b3.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -471,6 +480,7 @@ public class GameActivity extends AppCompatActivity {
                 if (correct == 4) {
                     cont ++;
                     puntuacion(cont);
+                    String score = String.valueOf(points);
                     b4.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                     b1.setBackgroundColor(getResources().getColor(R.color.colorRed));
                     b2.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -485,12 +495,14 @@ public class GameActivity extends AppCompatActivity {
                     },3000);
                 }
                 else {
-                    if(cont < 5 )
+                    if(cont < 5 ){
                         puntuacion(0);
+                        String score = String.valueOf(points);
+                    }
                     else {
-                        if (cont >= 5 & cont < 10) puntuacion(5);
+                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points);}
                         else {
-                            if (cont >= 10) puntuacion(10);
+                            if (cont >= 10){ puntuacion(10); String score = String.valueOf(points);}
                         }
                     }
                     b4.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -613,14 +625,8 @@ public class GameActivity extends AppCompatActivity {
                AlertDialog.Builder builder1 = builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
-                       if (ind < 5)
-                           puntuacion(0);
-                       else {
-                           if (ind >= 5 & ind < 10) puntuacion(5);
-                           else {
-                               if (ind >= 10) puntuacion(10);
-                           }
-                       }
+                       puntuacion(ind);
+                       String score = String.valueOf(points);
                        ind = 0;
                        assignation(ind);
                        findViewById(R.id.menu_fifty).setEnabled(true);
@@ -645,8 +651,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause(){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
-
-        MenuItem item;
 
         editor.putString("play_for", ((TextView) findViewById(R.id.PF_MN)).getText().toString());
         editor.putString("question_number", ((TextView) findViewById(R.id.QT_NB)).getText().toString());

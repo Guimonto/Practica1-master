@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sdm.pract1.whowantstobeamillionaire.adapter.ScoreAdapter;
+import sdm.pract1.whowantstobeamillionaire.databases.GameSqlHelper;
 
 public class ScoreActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         ScoreListFriends = new ArrayList<>();
-        ScoreListFriends.addAll(getMockUserScore());
+        ScoreListFriends.addAll(GameSqlHelper.getInstance(this).getScores());
 
         if(ScoreListUser.size() > 0)
             clearUserScore = true;
