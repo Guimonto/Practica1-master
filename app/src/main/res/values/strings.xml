@@ -1,0 +1,119 @@
+<resources>
+    <string name="app_name">Who wants to be a millionaire</string>
+    <string name="tvplay">Play</string>
+    <string name="tvscores">Scores</string>
+    <string name="tvsettings">Settings</string>
+    <string name="about">Who wants to be a millionaire\n\n Guillermo Montilla\n guimonto@inf.upv.es\n\n Emilio Miguel \n\n 2018</string>
+    <string name="name">Name: </string>
+    <string name="help_settings">How many times can you ask for help?</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="enter_friends_name">Enter your friends name</string>
+    <string name="add_friend">Add friend</string>
+    <string name="label_information">Information</string>
+    <string name="zero_help">0</string>
+    <string name="one_help">1</string>
+    <string name="two_help">2</string>
+    <string name="three_help">3</string>
+    <string name="play_for">Play for:</string>
+    <string name="qt">Question:</string>
+    <string name="delete_score">Are you sure you want to delete the score?</string>
+    <string name="score_local">Local</string>
+    <string name="score_friends">Friends</string>
+    <string name="price0">0$</string>
+    <string name="price100">100$</string>
+    <string name="price200">200$</string>
+    <string name="price300">300$</string>
+    <string name="price500">500$</string>
+    <string name="price1000">1000$</string>
+    <string name="price2000">2000$</string>
+    <string name="price4000">4000$</string>
+    <string name="price8000">8000$</string>
+    <string name="price16000">16000$</string>
+    <string name="price32000">32000$</string>
+    <string name="price64000">64000$</string>
+    <string name="price125000">125000$</string>
+    <string name="price250000">250000$</string>
+    <string name="price500000">500000$</string>
+    <string name="price1000000">1000000$</string>
+    <string name="end_game">Congratulations, you win! </string>
+    <string name="surrender">Are you sure you want to retire? </string>
+    <string name="looser">You loose...</string>
+    <string name="preference_name_summary">Name that identifies the user</string>
+    <string name="preference_name">User name</string>
+    <string name="jokers">Jokers</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="number_jokers">Number of jokers</string>
+    <string name="jokers_summary">Select the number of jokers which you want to play</string>
+    <string name="friends">Friends</string>
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+</resources>

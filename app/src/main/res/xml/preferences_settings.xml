@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:hint="@string/enter_name"
+        android:key="prefs_name"
+        android:summary="@string/preference_name_summary"
+        android:title="@string/preference_name" />
+
+    <EditTextPreference
+        android:hint="@string/add_friend"
+        android:key="prefs_friends"
+        android:summary="@string/enter_friends_name"
+        android:title="@string/add_friend"/>
+
+    <PreferenceCategory android:title="@string/jokers">
+        <ListPreference
+            android:title="@string/number_jokers"
+            android:summary="@string/jokers_summary"
+            android:entries="@array/jokers_array"
+            android:key="prefs_jokers"
+            android:entryValues="@array/jokers_values_array"/>
+    </PreferenceCategory>
+
+
+
+
+
+</PreferenceScreen>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="jokers_array">
+        <item>@string/zero_help</item>
+        <item>@string/one_help</item>
+        <item>@string/two_help</item>
+        <item>@string/three_help</item>
+    </array>
+
+    <array name="jokers_values_array">
+        <item>@string/zero_help</item>
+        <item>@string/one_help</item>
+        <item>@string/two_help</item>
+        <item>@string/three_help</item>
+    </array>
+
+</resources>
