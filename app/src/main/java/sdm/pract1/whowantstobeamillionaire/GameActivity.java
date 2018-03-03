@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -637,7 +636,9 @@ public class GameActivity extends AppCompatActivity {
                    public void onClick(DialogInterface dialog, int which) {
                        puntuacion(ind);
                        String score = String.valueOf(points);
-                       GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
+                       SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+                       String name = sharedPreferences.getString("prefs_name", getResources().getString(R.string.preference_name));
+                       GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);
                        ind = 0;
                        assignation(ind);
                        findViewById(R.id.menu_fifty).setEnabled(true);

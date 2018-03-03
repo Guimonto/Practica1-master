@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewDebug;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -45,6 +43,12 @@ public class ScoreActivity extends AppCompatActivity {
         adapter = new ScoreAdapter(this, ScoreListUser, R.layout.score_list_row);
 
         scoreListViewUser.setAdapter(adapter);
+
+        TextView tvName = findViewById(R.id.tv_player_name);
+
+        /*SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String name = sharedPreferences.getString("prefs_name", getResources().getString(R.string.preference_name));
+        tvName.setText(name);*/
 
 
 
