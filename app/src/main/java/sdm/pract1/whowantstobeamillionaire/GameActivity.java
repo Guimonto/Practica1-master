@@ -623,6 +623,9 @@ public class GameActivity extends AppCompatActivity {
                        }
                        ind = 0;
                        assignation(ind);
+                       findViewById(R.id.menu_fifty).setEnabled(true);
+                       findViewById(R.id.menu_people).setEnabled(true);
+                       findViewById(R.id.menu_phone).setEnabled(true);
                        Intent intent = new Intent(GameActivity.this, MainActivity.class);
                        startActivity(intent);
                    }
