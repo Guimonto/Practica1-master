@@ -668,6 +668,25 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+
+        outState.putString("play_for", ((TextView) findViewById(R.id.PF_MN)).getText().toString());
+        outState.putString("question_number", ((TextView) findViewById(R.id.QT_NB)).getText().toString());
+        outState.putInt("score", points);
+        outState.putString("question", ((TextView) findViewById(R.id.question)).getText().toString());
+        outState.putString("button1", ((TextView) findViewById(R.id.option1)).getText().toString());
+        outState.putString("button2", ((TextView) findViewById(R.id.option2)).getText().toString());
+        outState.putString("button3", ((TextView) findViewById(R.id.option3)).getText().toString());
+        outState.putString("button4", ((TextView) findViewById(R.id.option4)).getText().toString());
+        outState.putInt("right", Integer.parseInt(questions.get(ind).getRight()));
+        outState.putInt("indice", ind);
+        outState.putBoolean("fifty", (findViewById(R.id.menu_fifty)).isEnabled());
+        outState.putBoolean("people", (findViewById(R.id.menu_people)).isEnabled());
+        outState.putBoolean("phone",(findViewById(R.id.menu_phone)).isEnabled());
+        super.onSaveInstanceState(outState);
+    }
+
     public List<Question> generateQuestionList() {
         List<Question> list = new ArrayList<Question>();
         Question q = null;
