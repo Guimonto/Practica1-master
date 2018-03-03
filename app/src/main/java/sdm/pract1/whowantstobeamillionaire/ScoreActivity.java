@@ -49,7 +49,7 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         ScoreListFriends = new ArrayList<>();
-        ScoreListFriends.addAll(getMockUserScore());
+        //ScoreListFriends.addAll(getMockUserScore());
 
         if(ScoreListUser.size() > 0)
             clearUserScore = true;
@@ -110,7 +110,7 @@ public class ScoreActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<HighScore> getMockUserScore(){
+    /*private List<HighScore> getMockUserScore(){
         List<HighScore> result = new ArrayList<>();
         HighScore item;
 
@@ -120,5 +120,5 @@ public class ScoreActivity extends AppCompatActivity {
         result.add(item);
 
         return result;
-    }
+    }*/
 }
