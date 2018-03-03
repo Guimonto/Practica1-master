@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import sdm.pract1.whowantstobeamillionaire.databases.GameSqlHelper;
 import sdm.pract1.whowantstobeamillionaire.pojo.Question;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
     private int ind; /*Indice*/
     private int points; /*Puntos*/
     private int correct; /*Respuesta correcta*/
+    boolean addScore = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -348,14 +351,15 @@ public class GameActivity extends AppCompatActivity {
                     },3000);
                 }
                 else{
-                    if(cont < 5 ) {
-                        puntuacion(0);
+                    if(cont >= 10 ) {
+                        puntuacion(10);
                         String score = String.valueOf(points);
+                        GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
                     }
                     else {
-                        if (cont >= 5 & cont < 10) {puntuacion(5); String score = String.valueOf(points);}
+                        if (cont >= 5 & cont < 10) {puntuacion(5); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
                         else {
-                            if (cont >= 10) {puntuacion(10); String score = String.valueOf(points);}
+                            if (cont < 5) {puntuacion(0); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
                         }
                     }
                     b1.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -399,14 +403,15 @@ public class GameActivity extends AppCompatActivity {
                 }
                 else{
 
-                    if(cont < 5 ) {
-                        puntuacion(0);
+                    if(cont >= 10 ) {
+                        puntuacion(10);
                         String score = String.valueOf(points);
+                        GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
                     }
                     else {
-                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points);}
+                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
                         else {
-                            if (cont >= 10){ puntuacion(10); String score = String.valueOf(points);}
+                            if (cont < 10){ puntuacion(0); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
                         }
                     }
                     b2.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -447,14 +452,15 @@ public class GameActivity extends AppCompatActivity {
                     },3000);
                 }
                 else {
-                    if(cont < 5 ) {
-                        puntuacion(0);
+                    if(cont >= 10 ) {
+                        points = 32000;
                         String score = String.valueOf(points);
+                        GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
                     }
                     else {
-                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points);}
+                        if (cont >= 5 & cont < 10){ points = 1000; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
                         else {
-                            if (cont >= 10){ puntuacion(10); String score = String.valueOf(points);}
+                            if (cont < 5){ points = 0; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
                         }
                     }
                     b3.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -495,14 +501,18 @@ public class GameActivity extends AppCompatActivity {
                     },3000);
                 }
                 else {
-                    if(cont < 5 ){
-                        puntuacion(0);
+                    if(cont >= 10 ) {
+                        points = 32000;
                         String score = String.valueOf(points);
+                        GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
                     }
                     else {
-                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points);}
+                        if (cont >= 5 & cont < 10){
+                            points = 1000;
+                            String score = String.valueOf(points);
+                            GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
                         else {
-                            if (cont >= 10){ puntuacion(10); String score = String.valueOf(points);}
+                            if (cont < 5){ points = 0; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
                         }
                     }
                     b4.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -627,6 +637,7 @@ public class GameActivity extends AppCompatActivity {
                    public void onClick(DialogInterface dialog, int which) {
                        puntuacion(ind);
                        String score = String.valueOf(points);
+                       GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
                        ind = 0;
                        assignation(ind);
                        findViewById(R.id.menu_fifty).setEnabled(true);

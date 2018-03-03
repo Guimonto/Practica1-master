@@ -30,6 +30,7 @@ public class ScoreActivity extends AppCompatActivity {
     boolean clearUserScore;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         ScoreListUser = new ArrayList<>();
-        ScoreListUser.addAll(getMockUserScore());
+        ScoreListUser.addAll(GameSqlHelper.getInstance(this).getScores());
 
         scoreListViewUser = (ListView) findViewById(R.id.user_score);
 
@@ -48,7 +49,7 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         ScoreListFriends = new ArrayList<>();
-        ScoreListFriends.addAll(GameSqlHelper.getInstance(this).getScores());
+        ScoreListFriends.addAll(getMockUserScore());
 
         if(ScoreListUser.size() > 0)
             clearUserScore = true;
@@ -89,11 +90,13 @@ public class ScoreActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        ScoreListUser.clear();
+                        /*ScoreListUser.clear();
 
                         adapter.notifyDataSetChanged();
 
-                        clearUserScore = false;
+                        clearUserScore = false;*/
+
+                        GameSqlHelper.getInstance(ScoreActivity.this).clearAllUserScores();
 
                         supportInvalidateOptionsMenu();
 

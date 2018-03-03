@@ -33,7 +33,7 @@ public class GameSqlHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE ScoreTable " +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT NOT NULL, puntuation TEXT, UNIQUE(quote));");
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT NOT NULL, puntuation TEXT, UNIQUE(puntuation));");
     }
 
     @Override
