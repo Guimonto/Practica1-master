@@ -18,6 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -734,6 +740,26 @@ public class GameActivity extends AppCompatActivity {
         outState.putBoolean("people", (findViewById(R.id.menu_people)).isEnabled());
         outState.putBoolean("phone",(findViewById(R.id.menu_phone)).isEnabled());
         super.onSaveInstanceState(outState);
+    }
+
+    public void readXmlPullParser(View view) throws XmlPullParserException, IOException{
+        XmlPullParserFactory factory;
+        FileInputStream fis = null;
+        try {
+            StringBuilder sb = new StringBuilder();
+            factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            XmlPullParser xpp = factory.newPullParser();
+            fis = openFileInput("questions");
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public List<Question> generateQuestionList() {
