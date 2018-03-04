@@ -47,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
     private boolean addScore = false;
     /*Necesitamos una etiqueta con valor question para obtener
     * los objetos del fichero XML*/
-    private static final String ETIQUETA_QUESTION = "question";
+    //private static final String ETIQUETA_QUESTION = "question";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -751,7 +751,7 @@ public class GameActivity extends AppCompatActivity {
     public  void readXmlPullParser(){
         Question q;
         try {
-            FileInputStream fis = openFileInput(getResources().getXml(R.xml.questions));
+            FileInputStream fis = openFileInput("questions_spanish");
             InputStreamReader reader = new InputStreamReader(fis);
             XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
             parser.setInput(reader);
@@ -781,17 +781,17 @@ public class GameActivity extends AppCompatActivity {
 
     /*Obtenemos cada objeto Question*/
     private Question readQuestion(XmlPullParser p) throws XmlPullParserException, IOException {
-        String number = null;
-        String text = null;
-        String answer1 = null;
-        String answer2 = null;
-        String answer3 = null;
-        String answer4 = null;
-        String right = null;
-        String audience = null;
-        String phone = null;
-        String fifty1 = null;
-        String fifty2= null;
+        String number = "";
+        String text = "";
+        String answer1 = "";
+        String answer2 = "";
+        String answer3 = "";
+        String answer4 = "";
+        String right = "";
+        String audience = "";
+        String phone = "";
+        String fifty1 = "";
+        String fifty2= "";
 
         while (p.next() != XmlPullParser.END_TAG){
             if (p.getEventType() != XmlPullParser.START_TAG){
@@ -800,8 +800,8 @@ public class GameActivity extends AppCompatActivity {
             String name = p.getName();
 
             switch (name) {
-                case ETIQUETA_QUESTION:
-                    p.require(XmlPullParser.START_TAG, null, ETIQUETA_QUESTION);
+                case "question":
+                    p.require(XmlPullParser.START_TAG, null, "question");
                     number = p.getAttributeValue(null, "number");
                     text = p.getAttributeValue(null, "text");
                     answer1 = p.getAttributeValue(null, "answer1");
