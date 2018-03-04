@@ -23,7 +23,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,9 @@ public class GameActivity extends AppCompatActivity {
     private int points; /*Puntos*/
     private int correct; /*Respuesta correcta*/
     private boolean addScore = false;
+    /*Necesitamos una etiqueta con valor question para obtener
+    * los objetos del fichero XML*/
+    private static final String ETIQUETA_QUESTION = "question";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,7 @@ public class GameActivity extends AppCompatActivity {
         number_question = (TextView) findViewById(R.id.QT_NB);
         current_question = (TextView) findViewById(R.id.question);
         points = R.string.price0; correct = 0;
+
 
         b1.setBackgroundColor(getResources().getColor(R.color.colorGrey));
         b2.setBackgroundColor(getResources().getColor(R.color.colorGrey));
@@ -743,46 +749,76 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public  void readXmlPullParser(){
-        Question q = null;
-
-        XmlPullParserFactory factory;
-        FileInputStream fis = null;
+        Question q;
         try {
-            StringBuilder sb = new StringBuilder();
-            factory = XmlPullParserFactory.newInstance();
-            factory.setNamespaceAware(true);
-            XmlPullParser xpp = factory.newPullParser();
-            fis = openFileInput("questions_spanish_");
+            FileInputStream fis = openFileInput(getResources().getXml(R.xml.questions));
+            InputStreamReader reader = new InputStreamReader(fis);
+            XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+            parser.setInput(reader);
+            int eventType = parser.getEventType();
 
-            xpp.setInput(fis, null);
-
-            int eventType = xpp.getEventType();
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                if (eventType == XmlPullParser.START_DOCUMENT)
-                    sb.append(" [START] ");
-                else if (eventType == XmlPullParser.START_TAG)
-                    sb.append("\n<" + xpp.getName() + ">");
-                else if (eventType == XmlPullParser.END_TAG)
-                    sb.append("</" + xpp.getName() + ">");
-                else if (eventType == XmlPullParser.TEXT)
-                    sb.append(xpp.getText());
-
-                eventType = xpp.next();
-            }
-        } catch (XmlPullParserException e){
-            e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e){
-                    e.printStackTrace();
+            while (XmlPullParser.END_DOCUMENT != eventType) {
+                switch (eventType) {
+                    case XmlPullParser.START_TAG:
+                        q = readQuestion(parser);
+                        questions.add(q);
+                        break;
+                    case XmlPullParser.TEXT:
+                        break;
                 }
+                parser.next();
+                eventType = parser.getEventType();
             }
+         reader.close();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+    /*Obtenemos cada objeto Question*/
+    private Question readQuestion(XmlPullParser p) throws XmlPullParserException, IOException {
+        String number = null;
+        String text = null;
+        String answer1 = null;
+        String answer2 = null;
+        String answer3 = null;
+        String answer4 = null;
+        String right = null;
+        String audience = null;
+        String phone = null;
+        String fifty1 = null;
+        String fifty2= null;
+
+        while (p.next() != XmlPullParser.END_TAG){
+            if (p.getEventType() != XmlPullParser.START_TAG){
+                continue;
+            }
+            String name = p.getName();
+
+            switch (name) {
+                case ETIQUETA_QUESTION:
+                    p.require(XmlPullParser.START_TAG, null, ETIQUETA_QUESTION);
+                    number = p.getAttributeValue(null, "number");
+                    text = p.getAttributeValue(null, "text");
+                    answer1 = p.getAttributeValue(null, "answer1");
+                    answer2 = p.getAttributeValue(null, "answer2");
+                    answer3 = p.getAttributeValue(null, "answer3");
+                    answer4 = p.getAttributeValue(null, "answer4");
+                    right = p.getAttributeValue(null, "right");
+                    audience = p.getAttributeValue(null, "audience");
+                    phone = p.getAttributeValue(null, "phone");
+                    fifty1 = p.getAttributeValue(null, "fifty1");
+                    fifty2 = p.getAttributeValue(null, "fifty2");
+                    break;
+            }
+        }
+        return new Question(number, text, answer1, answer2, answer3, answer4, right, audience, phone, fifty1, fifty2);
+    }
+
 
     public List<Question> generateQuestionList() {
         List<Question> list = new ArrayList<Question>();
