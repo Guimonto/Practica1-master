@@ -45,9 +45,6 @@ public class GameActivity extends AppCompatActivity {
     private int points; /*Puntos*/
     private int correct; /*Respuesta correcta*/
     private boolean addScore = false;
-    /*Necesitamos una etiqueta con valor question para obtener
-    * los objetos del fichero XML*/
-    //private static final String ETIQUETA_QUESTION = "question";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +69,8 @@ public class GameActivity extends AppCompatActivity {
 
 
         /*Obtenemos la lista de preguntas*/
-        //questions = generateQuestionList();
-        readXmlPullParser();
+        questions = generateQuestionList();
+        //readXmlPullParser();
         /*Indice de preguntas*/
         //ind = 0;
 
@@ -747,7 +744,7 @@ public class GameActivity extends AppCompatActivity {
         outState.putBoolean("phone",(findViewById(R.id.menu_phone)).isEnabled());
         super.onSaveInstanceState(outState);
     }
-
+/*
     public  void readXmlPullParser(){
         Question q;
         try {
@@ -778,8 +775,9 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+*/
     /*Obtenemos cada objeto Question*/
+    /*
     private Question readQuestion(XmlPullParser p) throws XmlPullParserException, IOException {
         String number = "";
         String text = "";
@@ -817,7 +815,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         return new Question(number, text, answer1, answer2, answer3, answer4, right, audience, phone, fifty1, fifty2);
-    }
+    }*/
 
 
     public List<Question> generateQuestionList() {
