@@ -83,6 +83,37 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void game(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        String name = sharedPreferences.getString("prefs_name", getResources().getString(R.string.preference_name));
+        String jokers = sharedPreferences.getString("prefs_jokers", getResources().getString(R.string.number_jokers));
+        int joker = Integer.parseInt(jokers);
+        switch (joker) {
+            case(0):
+                findViewById(R.id.menu_phone).setEnabled(false);
+                findViewById(R.id.menu_people).setEnabled(false);
+                findViewById(R.id.menu_fifty).setEnabled(false);
+                break;
+
+            case(1):
+                findViewById(R.id.menu_phone).setEnabled(true);
+                findViewById(R.id.menu_people).setEnabled(false);
+                findViewById(R.id.menu_fifty).setEnabled(false);
+                break;
+
+            case(2):
+                findViewById(R.id.menu_phone).setEnabled(true);
+                findViewById(R.id.menu_people).setEnabled(false);
+                findViewById(R.id.menu_fifty).setEnabled(true);
+                break;
+
+            case(3):
+                findViewById(R.id.menu_phone).setEnabled(true);
+                findViewById(R.id.menu_people).setEnabled(true);
+                findViewById(R.id.menu_fifty).setEnabled(true);
+                break;
+
+        }
+
         /*Si el indice es menor o igual que 15 incrementamos una unidad*/
         if(ind < 15) ind++;
         else {
@@ -329,6 +360,8 @@ public class GameActivity extends AppCompatActivity {
     public void clickButtons(View v){
         correct = Integer.parseInt(questions.get(ind).getRight());
         int cont = 0;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+        String name = sharedPreferences.getString("prefs_name", getResources().getString(R.string.preference_name));
         switch (v.getId()){
             case R.id.option1:
                 if (correct == 1){
@@ -353,12 +386,12 @@ public class GameActivity extends AppCompatActivity {
                     if(cont >= 10 ) {
                         puntuacion(10);
                         String score = String.valueOf(points);
-                        GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
+                        GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);
                     }
                     else {
-                        if (cont >= 5 & cont < 10) {puntuacion(5); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
+                        if (cont >= 5 & cont < 10) {puntuacion(5); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);}
                         else {
-                            if (cont < 5) {puntuacion(0); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
+                            if (cont < 5) {puntuacion(0); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);}
                         }
                     }
                     b1.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -405,12 +438,12 @@ public class GameActivity extends AppCompatActivity {
                     if(cont >= 10 ) {
                         puntuacion(10);
                         String score = String.valueOf(points);
-                        GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
+                        GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);
                     }
                     else {
-                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
+                        if (cont >= 5 & cont < 10){ puntuacion(5); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);}
                         else {
-                            if (cont < 10){ puntuacion(0); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
+                            if (cont < 10){ puntuacion(0); String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);}
                         }
                     }
                     b2.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -454,12 +487,12 @@ public class GameActivity extends AppCompatActivity {
                     if(cont >= 10 ) {
                         points = 32000;
                         String score = String.valueOf(points);
-                        GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
+                        GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);
                     }
                     else {
-                        if (cont >= 5 & cont < 10){ points = 1000; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
+                        if (cont >= 5 & cont < 10){ points = 1000; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);}
                         else {
-                            if (cont < 5){ points = 0; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
+                            if (cont < 5){ points = 0; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);}
                         }
                     }
                     b3.setBackgroundColor(getResources().getColor(R.color.colorRed));
@@ -503,15 +536,15 @@ public class GameActivity extends AppCompatActivity {
                     if(cont >= 10 ) {
                         points = 32000;
                         String score = String.valueOf(points);
-                        GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);
+                        GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);
                     }
                     else {
                         if (cont >= 5 & cont < 10){
                             points = 1000;
                             String score = String.valueOf(points);
-                            GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
+                            GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);}
                         else {
-                            if (cont < 5){ points = 0; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore("Guillermo", score);}
+                            if (cont < 5){ points = 0; String score = String.valueOf(points); GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);}
                         }
                     }
                     b4.setBackgroundColor(getResources().getColor(R.color.colorRed));
