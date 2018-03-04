@@ -42,13 +42,12 @@ public class GameActivity extends AppCompatActivity {
     private int ind; /*Indice*/
     private int points; /*Puntos*/
     private int correct; /*Respuesta correcta*/
-    boolean addScore = false;
+    private boolean addScore = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
 
         /*Inicializamos aqui las variables*/
         b1 = (Button) findViewById(R.id.option1);
@@ -67,7 +66,8 @@ public class GameActivity extends AppCompatActivity {
 
 
         /*Obtenemos la lista de preguntas*/
-        questions = generateQuestionList();
+        //questions = generateQuestionList();
+        readXmlPullParser();
         /*Indice de preguntas*/
         //ind = 0;
 
@@ -742,7 +742,9 @@ public class GameActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    public void readXmlPullParser(View view) throws XmlPullParserException, IOException{
+    public  void readXmlPullParser(){
+        Question q = null;
+
         XmlPullParserFactory factory;
         FileInputStream fis = null;
         try {
@@ -750,7 +752,27 @@ public class GameActivity extends AppCompatActivity {
             factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
             XmlPullParser xpp = factory.newPullParser();
-            fis = openFileInput("questions");
+            fis = openFileInput("questions_spanish_");
+
+            xpp.setInput(fis, null);
+
+            int eventType = xpp.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_DOCUMENT)
+                    sb.append(" [START] ");
+                else if (eventType == XmlPullParser.START_TAG)
+                    sb.append("\n<" + xpp.getName() + ">");
+                else if (eventType == XmlPullParser.END_TAG)
+                    sb.append("</" + xpp.getName() + ">");
+                else if (eventType == XmlPullParser.TEXT)
+                    sb.append(xpp.getText());
+
+                eventType = xpp.next();
+            }
+        } catch (XmlPullParserException e){
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
         } finally {
             if (fis != null) {
                 try {
