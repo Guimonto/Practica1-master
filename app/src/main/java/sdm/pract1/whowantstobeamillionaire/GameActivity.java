@@ -308,8 +308,7 @@ public class GameActivity extends AppCompatActivity {
                 findViewById(R.id.menu_fifty).setEnabled(true);
                 findViewById(R.id.menu_people).setEnabled(true);
                 findViewById(R.id.menu_phone).setEnabled(true);
-                Intent intent = new Intent(GameActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
         }
     }
 
@@ -433,8 +432,7 @@ public class GameActivity extends AppCompatActivity {
                     findViewById(R.id.menu_fifty).setEnabled(true);
                     findViewById(R.id.menu_people).setEnabled(true);
                     findViewById(R.id.menu_phone).setEnabled(true);
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
 
 
                 }
@@ -485,8 +483,7 @@ public class GameActivity extends AppCompatActivity {
                     findViewById(R.id.menu_fifty).setEnabled(true);
                     findViewById(R.id.menu_people).setEnabled(true);
                     findViewById(R.id.menu_phone).setEnabled(true);
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
                 break;
 
@@ -534,8 +531,7 @@ public class GameActivity extends AppCompatActivity {
                     findViewById(R.id.menu_fifty).setEnabled(true);
                     findViewById(R.id.menu_people).setEnabled(true);
                     findViewById(R.id.menu_phone).setEnabled(true);
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
                 break;
 
@@ -586,8 +582,7 @@ public class GameActivity extends AppCompatActivity {
                     findViewById(R.id.menu_fifty).setEnabled(true);
                     findViewById(R.id.menu_people).setEnabled(true);
                     findViewById(R.id.menu_phone).setEnabled(true);
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
                 break;
         }
@@ -702,8 +697,7 @@ public class GameActivity extends AppCompatActivity {
                        findViewById(R.id.menu_fifty).setEnabled(true);
                        findViewById(R.id.menu_people).setEnabled(true);
                        findViewById(R.id.menu_phone).setEnabled(true);
-                       Intent intent = new Intent(GameActivity.this, MainActivity.class);
-                       startActivity(intent);
+                       finish();
                    }
 
                });

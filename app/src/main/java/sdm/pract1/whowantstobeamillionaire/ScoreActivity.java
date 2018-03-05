@@ -102,6 +102,8 @@ public class ScoreActivity extends AppCompatActivity {
 
                         GameSqlHelper.getInstance(ScoreActivity.this).clearAllUserScores();
 
+                        adapter.notifyDataSetChanged();
+
                         supportInvalidateOptionsMenu();
 
                     }
