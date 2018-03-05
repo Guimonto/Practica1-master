@@ -29,7 +29,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -783,28 +782,47 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public  void readXmlPullParser(){
-        try {
-            InputStream fis;
-            String language = Locale.getDefault().getLanguage();
-            if (language.equals("es")){
-                fis = this.getResources().openRawResource(R.raw.questions_spanish);
-            } else {
-                fis = this.getResources().openRawResource(R.raw.questions);
-            }
-            InputStreamReader reader = new InputStreamReader(fis);
-            XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-            parser.setInput(reader);
-            /*Aqui obtendremos la lista de cuestiones*/
-            questions = parseXML(parser);
 
-            reader.close();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String language = sharedPreferences.getString("pefs_language", getResources().getString(R.string.english));
+        if(language.equals("Spanish")) {
+            try {
+                InputStream fis = this.getResources().openRawResource(R.raw.questions_spanish);
+                InputStreamReader reader = new InputStreamReader(fis);
+                XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+                parser.setInput(reader);
+            /*Aqui obtendremos la lista de cuestiones*/
+                questions = parseXML(parser);
+
+                reader.close();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+        if(language.equals("English")) {
+            try {
+                InputStream fis = this.getResources().openRawResource(R.raw.questions);
+                InputStreamReader reader = new InputStreamReader(fis);
+                XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+                parser.setInput(reader);
+            /*Aqui obtendremos la lista de cuestiones*/
+                questions = parseXML(parser);
+
+                reader.close();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     /* Leer el documento XML y cogemos la informacion necesaria*/

@@ -14,4 +14,14 @@
         <item>@string/three_help</item>
     </array>
 
+    <array name="language_array">
+        <item>@string/english</item>
+        <item>@string/spanish</item>
+    </array>
+
+    <array name="language_values_array">
+        <item>@string/english</item>
+        <item>@string/spanish</item>
+    </array>
+
 </resources>

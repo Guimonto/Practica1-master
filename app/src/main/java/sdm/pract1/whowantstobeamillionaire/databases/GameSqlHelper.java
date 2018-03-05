@@ -10,15 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sdm.pract1.whowantstobeamillionaire.HighScore;
-import sdm.pract1.whowantstobeamillionaire.adapter.ScoreAdapter;
 
 /**
  * Created by Guill on 03/03/2018.
  */
 
 public class GameSqlHelper extends SQLiteOpenHelper {
-
-    ScoreAdapter adapter;
 
     private static GameSqlHelper instance;
 

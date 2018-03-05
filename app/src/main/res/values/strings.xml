@@ -45,6 +45,10 @@
     <string name="number_jokers">Number of jokers</string>
     <string name="jokers_summary">Select the number of jokers which you want to play</string>
     <string name="friends">Friends</string>
+    <string name="language">Language</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
+    <string name="select_language">Select your language</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
