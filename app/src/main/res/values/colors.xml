@@ -7,4 +7,15 @@
     <color name="colorYellow">#ffff00</color>
     <color name="colorGreen">#00ff00 </color>
     <color name="colorGrey">#dfdfdf</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorOrange">#F28220</color>
+    <color name="colorPuple">#C733C9</color>
+    <color name="colorPistachio">#C0D787</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorRed2">#DE0814</color>
+    <color name="colorPink">#E13157</color>
+    <color name="colorSalmon">#FA8071</color>
+    <color name="colorGreen2">#7EF40A</color>
+    <color name="colorCeleste">#ADDBD9</color>
+    <color name="colorCobalto">#0C23B1</color>
 </resources>
