@@ -25,6 +25,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,11 +69,10 @@ public class GameActivity extends AppCompatActivity {
         b4.setBackgroundColor(getResources().getColor(R.color.colorGrey));
 
 
-        /*Obtenemos la lista de preguntas*/
-        questions = generateQuestionList();
-        //readXmlPullParser();
-        /*Indice de preguntas*/
-        //ind = 0;
+        /*Obtenemos la lista de preguntas desde el metodo*/
+        //questions = generateQuestionList();
+        /*Obtenemos la lista de preguntas leyendo un fichero XML*/
+        readXmlPullParser();
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         ((TextView) findViewById(R.id.question)).setText(prefs.getString("question", ""));
@@ -760,8 +760,8 @@ public class GameActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
-    }*/
-
+    }
+*/
     @Override
     protected void onSaveInstanceState(Bundle outState){
 
@@ -780,29 +780,17 @@ public class GameActivity extends AppCompatActivity {
         outState.putBoolean("phone",(findViewById(R.id.menu_phone)).isEnabled());
         super.onSaveInstanceState(outState);
     }
-/*
+
     public  void readXmlPullParser(){
-        Question q;
         try {
-            FileInputStream fis = openFileInput("questions_spanish");
+            InputStream fis = this.getResources().openRawResource(R.raw.questions_spanish);
             InputStreamReader reader = new InputStreamReader(fis);
             XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
             parser.setInput(reader);
-            int eventType = parser.getEventType();
+            /*Aqui obtendremos la lista de cuestiones*/
+            questions = parseXML(parser);
 
-            while (XmlPullParser.END_DOCUMENT != eventType) {
-                switch (eventType) {
-                    case XmlPullParser.START_TAG:
-                        q = readQuestion(parser);
-                        questions.add(q);
-                        break;
-                    case XmlPullParser.TEXT:
-                        break;
-                }
-                parser.next();
-                eventType = parser.getEventType();
-            }
-         reader.close();
+            reader.close();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -811,47 +799,49 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-*/
-    /*Obtenemos cada objeto Question*/
-    /*
-    private Question readQuestion(XmlPullParser p) throws XmlPullParserException, IOException {
-        String number = "";
-        String text = "";
-        String answer1 = "";
-        String answer2 = "";
-        String answer3 = "";
-        String answer4 = "";
-        String right = "";
-        String audience = "";
-        String phone = "";
-        String fifty1 = "";
-        String fifty2= "";
 
-        while (p.next() != XmlPullParser.END_TAG){
-            if (p.getEventType() != XmlPullParser.START_TAG){
-                continue;
-            }
-            String name = p.getName();
+    /* Leer el documento XML y cogemos la informacion necesaria*/
+    private ArrayList<Question> parseXML(XmlPullParser parser) throws XmlPullParserException,IOException
+    {
+        ArrayList<Question> list = null;
+        int eventType = parser.getEventType();
+        Question q = null;
 
-            switch (name) {
-                case "question":
-                    p.require(XmlPullParser.START_TAG, null, "question");
-                    number = p.getAttributeValue(null, "number");
-                    text = p.getAttributeValue(null, "text");
-                    answer1 = p.getAttributeValue(null, "answer1");
-                    answer2 = p.getAttributeValue(null, "answer2");
-                    answer3 = p.getAttributeValue(null, "answer3");
-                    answer4 = p.getAttributeValue(null, "answer4");
-                    right = p.getAttributeValue(null, "right");
-                    audience = p.getAttributeValue(null, "audience");
-                    phone = p.getAttributeValue(null, "phone");
-                    fifty1 = p.getAttributeValue(null, "fifty1");
-                    fifty2 = p.getAttributeValue(null, "fifty2");
+        while (eventType != XmlPullParser.END_DOCUMENT){
+            String name;
+            switch (eventType){
+                case XmlPullParser.START_DOCUMENT:
+                    list = new ArrayList();
                     break;
+                case XmlPullParser.START_TAG:
+                    name = parser.getName();
+                    if (name.equals("question")){
+                        q = new Question();
+                        q.setAnswer1(parser.getAttributeValue(null,"answer1"));
+                        q.setAnswer2(parser.getAttributeValue(null,"answer2"));
+                        q.setAnswer3(parser.getAttributeValue(null,"answer3"));
+                        q.setAnswer4(parser.getAttributeValue(null,"answer4"));
+                        q.setAudience(parser.getAttributeValue(null,"audience"));
+                        q.setFifty1(parser.getAttributeValue(null,"fifty1"));
+                        q.setFifty2(parser.getAttributeValue(null,"fifty2"));
+                        q.setNumber(parser.getAttributeValue(null,"number"));
+                        q.setPhone(parser.getAttributeValue(null,"phone"));
+                        q.setRight(parser.getAttributeValue(null,"right"));
+                        q.setText(parser.getAttributeValue(null,"text"));
+                    }
+                    break;
+                case XmlPullParser.END_TAG:
+                    name = parser.getName();
+                    if (name.equalsIgnoreCase("question") && q != null){
+                        list.add(q);
+                    }
             }
+            eventType = parser.next();
         }
-        return new Question(number, text, answer1, answer2, answer3, answer4, right, audience, phone, fifty1, fifty2);
-    }*/
+
+        return list;
+
+    }
 
 
     public List<Question> generateQuestionList() {
