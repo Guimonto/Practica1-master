@@ -40,7 +40,7 @@
     <string name="looser">You loose...</string>
     <string name="preference_name_summary">Name that identifies the user</string>
     <string name="preference_name">User name</string>
-    <string name="jokers" translatable="false">Jokers</string>
+    <string name="jokers" translatable="false">Comodines</string>
     <string name="title_activity_settings">Settings</string>
     <string name="number_jokers">Number of jokers</string>
     <string name="jokers_summary">Select the number of jokers which you want to play</string>

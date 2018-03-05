@@ -21,7 +21,8 @@
             android:label="@string/label_information" />
         <activity
             android:name=".GameActivity"
-            android:label="@string/tvplay" />
+            android:label="@string/tvplay"
+            android:configChanges="locale"/>
         <activity
             android:name=".ScoreActivity"
             android:label="@string/tvscores"></activity>

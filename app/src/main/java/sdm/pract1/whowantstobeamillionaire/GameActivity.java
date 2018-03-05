@@ -3,7 +3,9 @@ package sdm.pract1.whowantstobeamillionaire;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Handler;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +31,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -46,6 +49,7 @@ public class GameActivity extends AppCompatActivity {
     private int points; /*Puntos*/
     private int correct; /*Respuesta correcta*/
     private boolean addScore = false;
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +89,30 @@ public class GameActivity extends AppCompatActivity {
         ((Button) findViewById(R.id.option2)).setText(prefs.getString("button2", ""));
         ((Button) findViewById(R.id.option3)).setText(prefs.getString("button3", ""));
         ((Button) findViewById(R.id.option4)).setText(prefs.getString("button4", ""));
+        language = prefs.getString("prefs_language", "-1");
+        Locale localeES = new Locale("es");
+        Locale localeEN = new Locale("en");
+        if (language.equals(String.valueOf(R.string.spanish)))
+        {
+            Locale.setDefault(localeES);
+            Configuration config = getBaseContext().getResources().getConfiguration();
+            config.locale = localeES;
+            getBaseContext().getResources().updateConfiguration(config,
+                    getBaseContext().getResources().getDisplayMetrics());
+        }
+        else{
+            Locale.setDefault(localeEN);
+            Configuration config = getBaseContext().getResources().getConfiguration();
+            config.locale = localeEN;
+            getBaseContext().getResources().updateConfiguration(config,
+                    getBaseContext().getResources().getDisplayMetrics());
 
+        }
 
         assignation(ind);
 
     }
 
-    /*Metodo que llamaremos varias veces durante la partida*/
     private void game(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         String name = sharedPreferences.getString("prefs_name", getResources().getString(R.string.preference_name));
@@ -784,46 +805,30 @@ public class GameActivity extends AppCompatActivity {
 
     public  void readXmlPullParser(){
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String language = sharedPreferences.getString("pefs_language", getResources().getString(R.string.english));
-        if(language.equals("Spanish")) {
-            try {
-                InputStream fis = this.getResources().openRawResource(R.raw.questions_spanish);
-                InputStreamReader reader = new InputStreamReader(fis);
-                XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-                parser.setInput(reader);
-            /*Aqui obtendremos la lista de cuestiones*/
-                questions = parseXML(parser);
-
-                reader.close();
-            } catch (XmlPullParserException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String language = Locale.getDefault().getLanguage();
+        String l = sp.getString("prefs_language", getResources().getString(R.string.language));
+        try {
+            InputStream fis;
+            if(l.equals("Spanish")) {
+                fis = this.getResources().openRawResource(R.raw.questions_spanish);
+            } else {
+                fis = this.getResources().openRawResource(R.raw.questions);
             }
-        }
-
-        if(language.equals("English")) {
-            try {
-                InputStream fis = this.getResources().openRawResource(R.raw.questions);
-                InputStreamReader reader = new InputStreamReader(fis);
-                XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-                parser.setInput(reader);
+            InputStreamReader reader = new InputStreamReader(fis);
+            XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+            parser.setInput(reader);
             /*Aqui obtendremos la lista de cuestiones*/
-                questions = parseXML(parser);
+            questions = parseXML(parser);
 
-                reader.close();
-            } catch (XmlPullParserException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            reader.close();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
     /* Leer el documento XML y cogemos la informacion necesaria*/

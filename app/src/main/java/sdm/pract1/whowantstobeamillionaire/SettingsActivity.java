@@ -3,6 +3,7 @@ package sdm.pract1.whowantstobeamillionaire;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -21,6 +22,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -36,7 +38,7 @@ import java.util.List;
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
-
+    //private String language;
     /**
      * Helper method to determine if the device has an extra-large screen. For
      * example, 10" tablets are extra-large.
@@ -53,6 +55,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.preferences_settings);
+
     }
 
     @Override
