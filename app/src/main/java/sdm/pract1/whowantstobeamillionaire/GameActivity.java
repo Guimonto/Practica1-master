@@ -91,6 +91,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /*Metodo que llamaremos varias veces durante la partida*/
     private void game(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
         String name = sharedPreferences.getString("prefs_name", getResources().getString(R.string.preference_name));
