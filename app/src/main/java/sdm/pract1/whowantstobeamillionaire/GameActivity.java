@@ -127,7 +127,24 @@ public class GameActivity extends AppCompatActivity {
         if(ind < 15) ind++;
         else {
             /*Partida finalizada*/
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(GameActivity.this, R.string.end_game, Toast.LENGTH_LONG).show();
+                }
+            },1);
+
+            puntuacion(ind);
+            String score = String.valueOf(points);
+            GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);
             ind = 0;
+            assignation(ind);
+            findViewById(R.id.menu_fifty).setEnabled(true);
+            findViewById(R.id.menu_people).setEnabled(true);
+            findViewById(R.id.menu_phone).setEnabled(true);
+            Intent intent = new Intent(GameActivity.this, MainActivity.class);
+            startActivity(intent);
         }
         /*Habilitamos los botones*/
         b1.setEnabled(true); b2.setEnabled(true); b3.setEnabled(true); b4.setEnabled(true);
@@ -293,6 +310,28 @@ public class GameActivity extends AppCompatActivity {
                 b4.setText(questions.get(a).getAnswer4());
 
                 break;
+
+            case 15:
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+                String name = sharedPreferences.getString("prefs_name", getResources().getString(R.string.preference_name));
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(GameActivity.this, R.string.end_game, Toast.LENGTH_LONG).show();
+                    }
+                },1);
+
+                puntuacion(ind);
+                String score = String.valueOf(points);
+                GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);
+                ind = 0;
+                assignation(ind);
+                findViewById(R.id.menu_fifty).setEnabled(true);
+                findViewById(R.id.menu_people).setEnabled(true);
+                findViewById(R.id.menu_phone).setEnabled(true);
+                Intent intent = new Intent(GameActivity.this, MainActivity.class);
+                startActivity(intent);
         }
     }
 
@@ -375,6 +414,7 @@ public class GameActivity extends AppCompatActivity {
             case R.id.option1:
                 if (correct == 1){
                     cont++;
+                    //youWin(cont);
                     puntuacion(cont);
                     String score = String.valueOf(points);
                     b1.setBackgroundColor(getResources().getColor(R.color.colorGreen));
@@ -426,6 +466,7 @@ public class GameActivity extends AppCompatActivity {
             case R.id.option2:
                 if (correct == 2) {
                     cont ++;
+                    //youWin(cont);
                     puntuacion(cont);
                     String score = String.valueOf(points);
                     b2.setBackgroundColor(getResources().getColor(R.color.colorGreen));
@@ -477,6 +518,7 @@ public class GameActivity extends AppCompatActivity {
             case R.id.option3:
                 if (correct == 3) {
                     cont ++;
+                    //youWin(cont);
                     puntuacion(cont);
                     String score = String.valueOf(points);
                     b3.setBackgroundColor(getResources().getColor(R.color.colorGreen));
@@ -526,6 +568,7 @@ public class GameActivity extends AppCompatActivity {
             case R.id.option4:
                 if (correct == 4) {
                     cont ++;
+                    //youWin(cont);
                     puntuacion(cont);
                     String score = String.valueOf(points);
                     b4.setBackgroundColor(getResources().getColor(R.color.colorGreen));
@@ -725,6 +768,32 @@ public class GameActivity extends AppCompatActivity {
         super.onPause();
 
     }
+
+    /*public void youWin(int aux){
+        if (aux == 15) {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(GameActivity.this, R.string.looser, Toast.LENGTH_LONG).show();
+                }
+            },1);
+
+            puntuacion(ind);
+            String score = String.valueOf(points);
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(GameActivity.this);
+            String name = sharedPreferences.getString("prefs_name", getResources().getString(R.string.preference_name));
+            GameSqlHelper.getInstance(GameActivity.this).addScore(name, score);
+            ind = 0;
+            assignation(ind);
+            findViewById(R.id.menu_fifty).setEnabled(true);
+            findViewById(R.id.menu_people).setEnabled(true);
+            findViewById(R.id.menu_phone).setEnabled(true);
+            Intent intent = new Intent(GameActivity.this, MainActivity.class);
+            startActivity(intent);
+
+        }
+    }*/
 
     @Override
     protected void onSaveInstanceState(Bundle outState){
