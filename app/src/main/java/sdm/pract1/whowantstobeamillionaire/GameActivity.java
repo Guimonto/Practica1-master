@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -783,7 +784,13 @@ public class GameActivity extends AppCompatActivity {
 
     public  void readXmlPullParser(){
         try {
-            InputStream fis = this.getResources().openRawResource(R.raw.questions_spanish);
+            InputStream fis;
+            String language = Locale.getDefault().getLanguage();
+            if (language.equals("es")){
+                fis = this.getResources().openRawResource(R.raw.questions_spanish);
+            } else {
+                fis = this.getResources().openRawResource(R.raw.questions);
+            }
             InputStreamReader reader = new InputStreamReader(fis);
             XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
             parser.setInput(reader);
